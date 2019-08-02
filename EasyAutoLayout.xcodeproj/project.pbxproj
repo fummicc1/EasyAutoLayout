@@ -17,6 +17,8 @@
 		D37CDD0322F3D98000CF9E21 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D37CDD0122F3D98000CF9E21 /* LaunchScreen.storyboard */; };
 		D37CDD0E22F3D98000CF9E21 /* DemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37CDD0D22F3D98000CF9E21 /* DemoTests.swift */; };
 		D37CDD1722F3D99D00CF9E21 /* EasyAutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37CDD1622F3D99D00CF9E21 /* EasyAutoLayout.swift */; };
+		D37CDD1822F3EDB700CF9E21 /* EasyAutoLayout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D37CDCD822F3D91500CF9E21 /* EasyAutoLayout.framework */; };
+		D37CDD1922F3EDB700CF9E21 /* EasyAutoLayout.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D37CDCD822F3D91500CF9E21 /* EasyAutoLayout.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,7 +36,28 @@
 			remoteGlobalIDString = D37CDCF522F3D97F00CF9E21;
 			remoteInfo = Demo;
 		};
+		D37CDD1A22F3EDB700CF9E21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D37CDCCF22F3D91500CF9E21 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D37CDCD722F3D91500CF9E21;
+			remoteInfo = EasyAutoLayout;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D37CDD1C22F3EDB700CF9E21 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D37CDD1922F3EDB700CF9E21 /* EasyAutoLayout.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		D37CDCD822F3D91500CF9E21 /* EasyAutoLayout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EasyAutoLayout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -76,6 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D37CDD1822F3EDB700CF9E21 /* EasyAutoLayout.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,10 +233,12 @@
 				D37CDCF222F3D97F00CF9E21 /* Sources */,
 				D37CDCF322F3D97F00CF9E21 /* Frameworks */,
 				D37CDCF422F3D97F00CF9E21 /* Resources */,
+				D37CDD1C22F3EDB700CF9E21 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				D37CDD1B22F3EDB700CF9E21 /* PBXTargetDependency */,
 			);
 			name = Demo;
 			productName = Demo;
@@ -364,6 +390,11 @@
 			isa = PBXTargetDependency;
 			target = D37CDCF522F3D97F00CF9E21 /* Demo */;
 			targetProxy = D37CDD0A22F3D98000CF9E21 /* PBXContainerItemProxy */;
+		};
+		D37CDD1B22F3EDB700CF9E21 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D37CDCD722F3D91500CF9E21 /* EasyAutoLayout */;
+			targetProxy = D37CDD1A22F3EDB700CF9E21 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -527,6 +558,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fumiya.EasyAutoLayout;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -603,6 +635,7 @@
 		D37CDD1122F3D98000CF9E21 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2X6AD4W323;
@@ -611,6 +644,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fumiya.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -621,6 +655,7 @@
 		D37CDD1222F3D98000CF9E21 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2X6AD4W323;
