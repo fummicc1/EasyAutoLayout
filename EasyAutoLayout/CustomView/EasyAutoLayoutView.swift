@@ -8,39 +8,38 @@ struct ConstraintStatus {
 
 extension UIView {
     
-    func setAutoLayout(merge: Bool, parentView: EasyAutoLayoutView, distanceController: Distance) {
+    func setAutoLayout(merge: Bool, parentView: EasyAutoLayoutView, distanceController: Distance) -> [NSLayoutConstraint] {
         if !merge {
             // delete previous constraints unless merge.
             removeConstraints(constraints)
         }
         // current support constraints are 4 attributes (top, bottom, left, right)
-        var topDistance = frame.origin.y
-        var bottomDistance = parentView.bounds.height - frame.origin.y - frame.height
-        var leftDistance = frame.origin.x
-        var rightDistance = parentView.bounds.width - frame.origin.x - frame.width
+        let topDistance = frame.origin.y * DeviceAdjustMent.heightMultiply
+        let bottomDistance = (DeviceAdjustMent.iPhoneXKindFrame.maxY - frame.maxY) * DeviceAdjustMent.heightMultiply
+        let leftDistance = frame.origin.x * DeviceAdjustMent.widthMultiply
+        let rightDistance = (DeviceAdjustMent.iPhoneXKindFrame.maxX - frame.maxX) * DeviceAdjustMent.widthMultiply
         
-        if topDistance < 0 {
-            bottomDistance += -topDistance + distanceController.defaultTop
-            topDistance = distanceController.defaultTop
+        let topConstraint = self.topAnchor.constraint(equalTo: parentView.topAnchor, constant: topDistance)
+        let bottomConstraint = self.bottomAnchor.constraint(equalTo: parentView.bottomAnchor, constant: -bottomDistance)
+        let leftConstraint = self.leftAnchor.constraint(equalTo: parentView.leftAnchor, constant: leftDistance)
+        let rightConstraint = self.rightAnchor.constraint(equalTo: parentView.rightAnchor, constant: -rightDistance)
+        let widthConstraint = self.widthAnchor.constraint(equalToConstant: frame.width * DeviceAdjustMent.widthMultiply)
+        let heightConstraint = self.heightAnchor.constraint(equalToConstant: frame.height * DeviceAdjustMent.heightMultiply)
+        
+        for constraint in [topConstraint, bottomConstraint] {
+            if constraint.constant > UIScreen.main.bounds.height / 2 {
+                constraint.priority = .defaultLow
+            }
         }
-        if bottomDistance < 0 {
-            topDistance -= -bottomDistance + distanceController.defaultBottom
-            bottomDistance = distanceController.defaultBottom
+        
+        for constraint in [rightConstraint, leftConstraint] {
+            if constraint.constant > UIScreen.main.bounds.width / 2 {
+                constraint.priority = .defaultLow
+            }
         }
-        if leftDistance < 0 {
-            rightDistance = -leftDistance + distanceController.defaultLeft
-            leftDistance = distanceController.defaultLeft
-        }
-        if rightDistance < 0 {
-            leftDistance = -rightDistance + distanceController.defaultRight
-            rightDistance = distanceController.defaultRight
-        }
-        let topAnchor = parentView.topAnchor.constraint(equalTo: self.topAnchor, constant: -topDistance)
-        let bottomAnchor = parentView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: bottomDistance)
-        let leftAnchor = parentView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: -leftDistance)
-        let rightAnchor = parentView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: rightDistance)
+        
         translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([topAnchor, bottomAnchor, leftAnchor, rightAnchor])
+        return [topConstraint, bottomConstraint, leftConstraint, rightConstraint, widthConstraint, heightConstraint]
     }
 }
 
