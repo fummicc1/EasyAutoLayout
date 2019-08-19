@@ -11,13 +11,8 @@ open class EasyAutoLayoutViewController: UIViewController {
                 deviceAdjustment = DeviceAdjustMent(displayDeviceType: deviceType.type)
             }
         }
-        
         return deviceAdjustment
     }()
-    
-    var easyLayoutSubViews: [EasyAutoLayoutView] {
-        return view.subviews
-    }
     
     var layoutConstraints: [[NSLayoutConstraint]] = []
     
@@ -51,6 +46,7 @@ open class EasyAutoLayoutViewController: UIViewController {
     
     open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setEasyAutoLayout()
     }
     
     open override func viewDidLayoutSubviews() {
@@ -59,36 +55,35 @@ open class EasyAutoLayoutViewController: UIViewController {
     }
     
     public func setEasyAutoLayout(distance: Distance = Distance()) {
-        let subViewsOrderedByTop = easyLayoutSubViews.sorted { $0.frame.origin.y < $1.frame.origin.y }
+        let subViewsOrderedByTop = view.subviews.sorted { $0.frame.origin.y < $1.frame.origin.y }
         for (index, view) in subViewsOrderedByTop.enumerated() {
-            if subViewsOrderedByTop.last == view {
-                if view.subviews.isNotEmpty {
-                    for childSubView in view.subviews {
-                        layoutConstraints.append(setLayout(target: childSubView, parent: view, attributes: []))
-                    }
-                }
-                return
-            } else if subViewsOrderedByTop.first == view {
-                if view.subviews.isNotEmpty {
-                    for childSubView in view.subviews {
-                    }
-                }
-                return
+            if subViewsOrderedByTop.last == view { // 一番下にあるビューに対しては親と.bottom, １つ上のビューとは.topを制約する。
+                layoutConstraints.append(
+                    setLayout(target: view, parent: self.view, attributes: [.bottom])
+                )                
+                continue
+            } else if subViewsOrderedByTop.first == view { // 一番上にあるビューに対しては親と.top, １つ上のビューとは.bottomを制約する。
+                layoutConstraints.append(
+                    setLayout(target: view, parent: self.view, attributes: [.top])
+                )
+                layoutConstraints.append(
+                    setLayout(target: view, neighborhoodView: subViewsOrderedByTop[index+1], attributes: [.bottom])
+                )
+                continue
             }
-            if view.subviews.isNotEmpty {
-                for childSubView in view.subviews {
-                    layoutConstraints.append(setLayout(target: childSubView, neighborhoodView: subViewsOrderedByTop[index+1]))
-                }
-            }
-            layoutConstraints.append(setLayout(target: view, neighborhoodView: subViewsOrderedByTop[index+1]))
+            // 何かに挟まれているビューの制約は.topと.bottom
+            layoutConstraints.append(contentsOf: [
+                setLayout(target: view, neighborhoodView: subViewsOrderedByTop[index+1], attributes: [.bottom]),
+                setLayout(target: view, neighborhoodView: subViewsOrderedByTop[index-1], attributes: [.top])
+                ])
         }
     }
     
-    private func setLayout(target: EasyAutoLayoutView, neighborhoodView: EasyAutoLayoutView) -> [NSLayoutConstraint] {
-        return target.setAutoLayout(merge: true, neighborhoodView: neighborhoodView)
+    private func setLayout(target: EasyAutoLayoutView, neighborhoodView: EasyAutoLayoutView, attributes: [(from: LayoutAnchor, to: LayoutAnchor)]) -> [NSLayoutConstraint] {
+        return target.setAutoLayout(merge: true, neighborhoodView: neighborhoodView, attributes: attributes)
     }
     
-    private func setLayout(target: EasyAutoLayoutView, parent: EasyAutoLayoutView, attributes: [NSLayoutAnchor<AnyObject>]) -> [NSLayoutConstraint] {
+    private func setLayout(target: EasyAutoLayoutView, parent: EasyAutoLayoutView, attributes: [(from: LayoutAnchor, to: LayoutAnchor)]) -> [NSLayoutConstraint] {
         return target.setAutoLayout(merge: true, parentView: parent, distanceController: Distance(), attributes: attributes)
     }
 }

@@ -127,14 +127,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D379DD7522F551AF00ED0AAB /* CustomView */ = {
-			isa = PBXGroup;
-			children = (
-				D379DD7322F5518B00ED0AAB /* EasyAutoLayoutView.swift */,
-			);
-			path = CustomView;
-			sourceTree = "<group>";
-		};
 		D37CDCCE22F3D91500CF9E21 = {
 			isa = PBXGroup;
 			children = (
@@ -166,10 +158,10 @@
 				D3FF1F8822F5A98000CCE995 /* CGRect+Mathematicable.swift */,
 				D3FF1F8622F59FCC00CCE995 /* DeviceAdjustMent.swift */,
 				D379DD7122F5516000ED0AAB /* Distance.swift */,
+				D379DD7322F5518B00ED0AAB /* EasyAutoLayoutView.swift */,
 				D37CDD1622F3D99D00CF9E21 /* EasyAutoLayoutViewController.swift */,
-				D379DD7C22F55CAD00ED0AAB /* Typealias.swift */,
-				D379DD7522F551AF00ED0AAB /* CustomView */,
 				D3970E6C230943290069D668 /* LayoutAnchor.swift */,
+				D379DD7C22F55CAD00ED0AAB /* Typealias.swift */,
 			);
 			path = EasyAutoLayout;
 			sourceTree = "<group>";

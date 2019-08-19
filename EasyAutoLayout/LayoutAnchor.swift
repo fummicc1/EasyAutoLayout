@@ -1,6 +1,6 @@
 import Foundation
 
-enum LayoutAnchor {
+enum LayoutAnchor: CaseIterable {
     case top
     case bottom
     case left
