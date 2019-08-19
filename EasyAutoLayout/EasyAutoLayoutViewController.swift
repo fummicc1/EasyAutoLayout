@@ -19,10 +19,6 @@ open class EasyAutoLayoutViewController: UIViewController {
         return view.subviews
     }
     
-    var easyAutoLayoutCollisionStatusList: [ConstraintStatus] {
-        return checkIsSubViewsIntersecting()
-    }
-    
     var layoutConstraints: [[NSLayoutConstraint]] = []
     
     open override func viewDidLoad() {
@@ -63,43 +59,36 @@ open class EasyAutoLayoutViewController: UIViewController {
     }
     
     public func setEasyAutoLayout(distance: Distance = Distance()) {
-        for view in easyLayoutSubViews {
+        let subViewsOrderedByTop = easyLayoutSubViews.sorted { $0.frame.origin.y < $1.frame.origin.y }
+        for (index, view) in subViewsOrderedByTop.enumerated() {
+            if subViewsOrderedByTop.last == view {
+                if view.subviews.isNotEmpty {
+                    for childSubView in view.subviews {
+                        layoutConstraints.append(setLayout(target: childSubView, parent: view, attributes: []))
+                    }
+                }
+                return
+            } else if subViewsOrderedByTop.first == view {
+                if view.subviews.isNotEmpty {
+                    for childSubView in view.subviews {
+                    }
+                }
+                return
+            }
             if view.subviews.isNotEmpty {
                 for childSubView in view.subviews {
-                    layoutConstraints.append(setLayout(target: childSubView, parent: view))
+                    layoutConstraints.append(setLayout(target: childSubView, neighborhoodView: subViewsOrderedByTop[index+1]))
                 }
             }
-            layoutConstraints.append(setLayout(target: view, parent: self.view))
+            layoutConstraints.append(setLayout(target: view, neighborhoodView: subViewsOrderedByTop[index+1]))
         }
-//        let isIntersectinfConstraintStatusList = easyAutoLayoutCollisionStatusList.filter({$0.isIntersecting})
-//        for easyAutoLayoutCollisionStatus in isIntersectinfConstraintStatusList {
-//            guard let me = easyAutoLayoutCollisionStatus.me, let target = easyAutoLayoutCollisionStatus.target else { return }
-//            me.frame.origin.y += me.frame.origin.y < target.frame.origin.y ? -distance.defaultTop : distance.defaultTop
-//            me.frame.origin.x += me.frame.origin.x < target.frame.origin.x ? -distance.defaultLeft : distance.defaultLeft
-//        }
     }
     
-    private func setLayout(target: EasyAutoLayoutView, parent: EasyAutoLayoutView) -> [NSLayoutConstraint] {
-        return target.setAutoLayout(merge: true, parentView: parent, distanceController: Distance())
+    private func setLayout(target: EasyAutoLayoutView, neighborhoodView: EasyAutoLayoutView) -> [NSLayoutConstraint] {
+        return target.setAutoLayout(merge: true, neighborhoodView: neighborhoodView)
     }
     
-    func checkIsSubViewsIntersecting() -> [ConstraintStatus] {
-        
-        let subViewsSortedByY = easyLayoutSubViews.sorted(by: {$0.frame.minY < $1.frame.minY})
-        
-        var resultList: [ConstraintStatus] = []
-        
-        for (index, subView) in subViewsSortedByY.enumerated() {
-            let compareView: EasyAutoLayoutView
-            if index == subViewsSortedByY.count - 1 {
-                compareView = subViewsSortedByY[index - 1]
-            } else {
-                compareView = subViewsSortedByY[(index + 1)]
-            }
-            if subView.superview != compareView.superview { continue }
-            let collisionStatus = ConstraintStatus(me: subView, target: compareView, isIntersecting: subView.frame.intersects(compareView.frame))
-            resultList.append(collisionStatus)
-        }
-        return resultList
+    private func setLayout(target: EasyAutoLayoutView, parent: EasyAutoLayoutView, attributes: [NSLayoutAnchor<AnyObject>]) -> [NSLayoutConstraint] {
+        return target.setAutoLayout(merge: true, parentView: parent, distanceController: Distance(), attributes: attributes)
     }
 }
