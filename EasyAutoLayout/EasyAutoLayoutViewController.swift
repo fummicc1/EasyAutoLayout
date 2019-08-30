@@ -57,33 +57,42 @@ open class EasyAutoLayoutViewController: UIViewController {
     public func setEasyAutoLayout(distance: Distance = Distance()) {
         let subViewsOrderedByTop = view.subviews.sorted { $0.frame.origin.y < $1.frame.origin.y }
         for (index, view) in subViewsOrderedByTop.enumerated() {
+            
+            let top = \EasyAutoLayoutView.topAnchor as! WritableKeyPath<EasyAutoLayoutView, NSLayoutYAxisAnchor>
+            let bottom = \EasyAutoLayoutView.bottomAnchor as! WritableKeyPath<EasyAutoLayoutView, NSLayoutYAxisAnchor>
+            
             if subViewsOrderedByTop.last == view { // 一番下にあるビューに対しては親と.bottom, １つ上のビューとは.topを制約する。
-                layoutConstraints.append(
-                    setLayout(target: view, parent: self.view, attributes: [.bottom])
-                )                
+                
+                setLayout(target: view, from: self.view, attributes: (from: bottom, to: bottom), distance: (from: \EasyAutoLayoutView.frame.maxY, to: \EasyAutoLayoutView.frame.maxY), multiply: 1, isVerticle: true)
+                
+                setLayout(target: view, from: subViewsOrderedByTop[index-1], attributes: (from: bottom, to: top), distance: (from: \EasyAutoLayoutView.frame.maxY, to: \EasyAutoLayoutView.frame.origin.y), multiply: 1, isVerticle: true)
+                
                 continue
             } else if subViewsOrderedByTop.first == view { // 一番上にあるビューに対しては親と.top, １つ上のビューとは.bottomを制約する。
-                layoutConstraints.append(
-                    setLayout(target: view, parent: self.view, attributes: [.top])
-                )
-                layoutConstraints.append(
-                    setLayout(target: view, neighborhoodView: subViewsOrderedByTop[index+1], attributes: [.bottom])
-                )
+                
+                setLayout(target: view, from: self.view, attributes: (from: top, to: top), distance: (from: \EasyAutoLayoutView.frame.origin.y, to: \EasyAutoLayoutView.frame.origin.y), multiply: 1, isVerticle: true)
+                
+                setLayout(target: view, from: subViewsOrderedByTop[index+1], attributes: (from: bottom, to: top), distance: (from: \EasyAutoLayoutView.frame.maxY, to: \EasyAutoLayoutView.frame.origin.y), multiply: 1, isVerticle: true)
+                
                 continue
             }
             // 何かに挟まれているビューの制約は.topと.bottom
-            layoutConstraints.append(contentsOf: [
-                setLayout(target: view, neighborhoodView: subViewsOrderedByTop[index+1], attributes: [.bottom]),
-                setLayout(target: view, neighborhoodView: subViewsOrderedByTop[index-1], attributes: [.top])
-                ])
+            
+            setLayout(target: view, from: subViewsOrderedByTop[index-1], attributes: (from: bottom, to: top), distance: (from: \EasyAutoLayoutView.frame.maxY, to: \EasyAutoLayoutView.frame.origin.y), multiply: 1, isVerticle: true)
+            
+            setLayout(target: view, from: subViewsOrderedByTop[index+1], attributes: (from: top, to: bottom), distance: (from: \EasyAutoLayoutView.frame.origin.y, to: \EasyAutoLayoutView.frame.maxY), multiply: 1, isVerticle: true)
         }
     }
     
-    private func setLayout(target: EasyAutoLayoutView, neighborhoodView: EasyAutoLayoutView, attributes: [(from: LayoutAnchor, to: LayoutAnchor)]) -> [NSLayoutConstraint] {
-        return target.setAutoLayout(merge: true, neighborhoodView: neighborhoodView, attributes: attributes)
-    }
-    
-    private func setLayout(target: EasyAutoLayoutView, parent: EasyAutoLayoutView, attributes: [(from: LayoutAnchor, to: LayoutAnchor)]) -> [NSLayoutConstraint] {
-        return target.setAutoLayout(merge: true, parentView: parent, distanceController: Distance(), attributes: attributes)
+    private func setLayout<T>(
+        target: EasyAutoLayoutView,
+        from: EasyAutoLayoutView,
+        attributes: (from: WritableKeyPath<EasyAutoLayoutView, T>, to: WritableKeyPath<EasyAutoLayoutView, T>),
+        distance: (from: KeyPath<EasyAutoLayoutView, CGFloat>, to: KeyPath<EasyAutoLayoutView, CGFloat>),
+        multiply: CGFloat = 1,
+        isVerticle: Bool
+        ) {
+        guard let constraint = target.setAutoLayout(merge: true, from: from, attributes: attributes, distance: distance, multiply: multiply, isVerticle: isVerticle) else { return }
+        self.layoutConstraints.append([constraint])
     }
 }

@@ -21,78 +21,42 @@ extension EasyAutoLayoutView {
 
 extension EasyAutoLayoutView {
     
-    func setAutoLayout(merge: Bool, neighborhoodView: EasyAutoLayoutView, attributes: [(from: LayoutAnchor, to: LayoutAnchor)] ) -> [NSLayoutConstraint] {
-        guard self.superview == neighborhoodView.superview else { return [] }
+    func setAutoLayout<T>(
+        merge: Bool,
+        from: EasyAutoLayoutView,
+        attributes: (from: WritableKeyPath<EasyAutoLayoutView, T>, to: WritableKeyPath<EasyAutoLayoutView, T>),
+        distance: (from: KeyPath<EasyAutoLayoutView, CGFloat>, to: KeyPath<EasyAutoLayoutView, CGFloat>),
+        multiply: CGFloat,        
+        isVerticle: Bool = true
+        ) -> NSLayoutConstraint? {
+        guard self.superview == from.superview else { return nil }
         
         translatesAutoresizingMaskIntoConstraints = false
-        neighborhoodView.translatesAutoresizingMaskIntoConstraints = false
+        from.translatesAutoresizingMaskIntoConstraints = false
         
         if !merge {
             // delete previous constraints.
             removeConstraints(constraints)
         }
+
+        var distance = (from[keyPath: distance.from] - self[keyPath: distance.to])
         
-        let topDistance = (neighborhoodView.frame.origin.y - frame.origin.y) * DeviceAdjustMent.heightMultiply
-        let bottomDistance = (neighborhoodView.frame.maxY - frame.maxY) * DeviceAdjustMent.heightMultiply
-        let leftDistance = (neighborhoodView.frame.origin.x - frame.origin.x) * DeviceAdjustMent.widthMultiply
-        let rightDistance = (neighborhoodView.frame.maxX - neighborhoodView.frame.maxX) * DeviceAdjustMent.widthMultiply
+        distance = isVerticle ? distance * DeviceAdjustMent.heightMultiply : DeviceAdjustMent.widthMultiply
+        var constraint: NSLayoutConstraint
+        let from = from[keyPath: attributes.from]
+        let to = self[keyPath: attributes.to]
         
-        var constraintList: [NSLayoutConstraint] = []
-        
-        for attribute in attributes {
-            getAnchor(from: attribute.from, top: { (anchor) in
-                
-                neighborhoodView.getAnchor(from: attribute.to, top: { (neighborAnchor) in
-                    constraintList.append(anchor.constraint(equalTo: neighborAnchor, constant: topDistance))
-                }, bottom: { (neighborAnchor) in
-                    constraintList.append(anchor.constraint(equalTo: neighborAnchor, constant: topDistance))
-                }, left: nil, right: nil, width: nil, height: nil)
-            }, bottom: { (anchor) in
-                constraintList.append(anchor.constraint(equalTo: neighborhoodView.bottomAnchor, constant: -bottomDistance))
-            }, left: { (anchor) in
-                constraintList.append(anchor.constraint(equalTo: neighborhoodView.leftAnchor, constant: leftDistance))
-            }, right: { (anchor) in
-                constraintList.append(anchor.constraint(equalTo: neighborhoodView.rightAnchor, constant: -rightDistance))
-            }, width: { (anchor) in
-                assert(false) // not implemented
-            }, height: { (anchor) in
-                assert(false) // not implemented
-            })
+        if case let (from?, to?) = (from as? NSLayoutDimension, to as? NSLayoutDimension)  {
+            constraint = from.constraint(equalTo: to, multiplier: multiply)
+            return constraint
+        } else if case let (from?, to?) = (from as? NSLayoutXAxisAnchor, to as? NSLayoutXAxisAnchor) {
+            constraint = from.constraint(equalTo: to, constant: distance)
+            return constraint
+        } else if case let (from?, to?) = (from as? NSLayoutYAxisAnchor, to as? NSLayoutYAxisAnchor) {
+            constraint = from.constraint(equalTo: to, constant: distance)
+            return constraint
         }
-        return constraintList
-    }
-    
-    
-    func setAutoLayout(merge: Bool, parentView: EasyAutoLayoutView, distanceController: Distance, attributes: [(from: LayoutAnchor, to: LayoutAnchor)]) -> [NSLayoutConstraint] {
-        translatesAutoresizingMaskIntoConstraints = false
-        if !merge {
-            // delete previous constraints.
-            removeConstraints(constraints)
-        }
-        // current support constraints are 4 attributes (top, bottom, left, right)
-        let topDistance = frame.origin.y * DeviceAdjustMent.heightMultiply
-        let bottomDistance = (DeviceAdjustMent.iPhoneXKindFrame.maxY - frame.maxY) * DeviceAdjustMent.heightMultiply
-        let leftDistance = frame.origin.x * DeviceAdjustMent.widthMultiply
-        let rightDistance = (DeviceAdjustMent.iPhoneXKindFrame.maxX - frame.maxX) * DeviceAdjustMent.widthMultiply
-        
-        var constraintList: [NSLayoutConstraint] = []
-        
-        for attribute in attributes {
-            getAnchor(from: attribute, top: { (anchor) in
-                        constraintList.append(anchor.constraint(equalTo: parentView.topAnchor, constant: topDistance))
-            }, bottom: { (anchor) in
-                constraintList.append(anchor.constraint(equalTo: parentView.bottomAnchor, constant: -bottomDistance))
-            }, left: { (anchor) in
-                constraintList.append(anchor.constraint(equalTo: parentView.leftAnchor, constant: leftDistance))
-            }, right: { (anchor) in
-                constraintList.append(anchor.constraint(equalTo: parentView.rightAnchor, constant: -rightDistance))
-            }, width: { (anchor) in
-                assert(false) // not implemented
-            }, height: { (anchor) in
-                assert(false) // not implemented
-            })
-        }
-        return constraintList
+        return nil
     }
 }
 
