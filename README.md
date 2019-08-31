@@ -8,7 +8,13 @@ Storyboard上でiPhoneXまたはiPhoneXSのレイアウトを組めば、他の�
 
 # 現在の状況 (current version == 1.0.0)
 
+## Storyboard上でのレイアウト
+![picture2](Assets/picture2.png)
+
+## 実際のレイアウト
+
 ![picture](Assets/picture1.png)
+
 
 # How to user
 いつも通り継承している`UIViewController`の代わりに`EasyAutoLayoutViewController`を継承するのみです。
