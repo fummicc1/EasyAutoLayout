@@ -71,7 +71,7 @@ open class EasyAutoLayoutViewController: UIViewController {
                     target: subview,
                     from: self.view,
                     attributes: (from: bottom, to: bottom),
-                    distance: (self.view.frame.maxY - subViewsSizeOrderedByTop[index].maxY * DeviceAdjustMent.heightMultiply),
+                    distance: (-self.view.frame.maxY + subViewsSizeOrderedByTop[index].maxY * DeviceAdjustMent.heightMultiply),
                     isVerticle: true
                 )
                 
@@ -122,7 +122,7 @@ open class EasyAutoLayoutViewController: UIViewController {
                 target: subview,
                 from: subViewsOrderedByTop[index-1],
                 attributes: (from: bottom, to: top),
-                distance: (subview.frame.origin.y - subViewsOrderedByTop[index-1].frame.maxY),
+                distance: (subViewsSizeOrderedByTop[index].origin.y - subViewsOrderedByTop[index-1].frame.maxY),
                 isVerticle: true
             )
             
@@ -130,11 +130,9 @@ open class EasyAutoLayoutViewController: UIViewController {
                 target: subview,
                 from: subViewsOrderedByTop[index+1],
                 attributes: (from: top, to: bottom),
-                distance: (subview.frame.maxY - subViewsOrderedByTop[index+1].frame.origin.y),
+                distance: (subViewsSizeOrderedByTop[index].maxY - subViewsOrderedByTop[index+1].frame.origin.y),
                 isVerticle: true
             )
-            
-//            subview.setContentCompressionResistancePriority(.init(699), for: .vertical)
             
             setLayout(
                 target: subview,
@@ -160,7 +158,7 @@ open class EasyAutoLayoutViewController: UIViewController {
                     target: subview,
                     from: self.view,
                     attributes: (from: right, to: right),
-                    distance: (subview.frame.maxX * DeviceAdjustMent.widthMultiply - self.view.frame.maxX),
+                    distance: (subViewsSizeOrderedByLeft[index].maxX * DeviceAdjustMent.widthMultiply - self.view.frame.maxX),
                     isVerticle: false
                 )
                 
@@ -168,7 +166,7 @@ open class EasyAutoLayoutViewController: UIViewController {
                     target: subview,
                     from: subViewsOrderedByLeft[index-1],
                     attributes: (from: right, to: left),
-                    distance: (subview.frame.origin.x - subViewsOrderedByLeft[index-1].frame.maxX),
+                    distance: (subViewsSizeOrderedByLeft[index].origin.x - subViewsOrderedByLeft[index-1].frame.maxX),
                     isVerticle: false
                 )
                 
@@ -185,7 +183,7 @@ open class EasyAutoLayoutViewController: UIViewController {
                     target: subview,
                     from: self.view,
                     attributes: (from: left, to: left),
-                    distance: (subview.frame.origin.x * DeviceAdjustMent.widthMultiply - self.view.frame.origin.x),
+                    distance: (subViewsSizeOrderedByLeft[index].origin.x * DeviceAdjustMent.widthMultiply - self.view.frame.origin.x),
                     isVerticle: false
                 )
                 
@@ -193,7 +191,7 @@ open class EasyAutoLayoutViewController: UIViewController {
                     target: subview,
                     from: subViewsOrderedByLeft[index+1],
                     attributes: (from: left, to: right),
-                    distance: (subview.frame.maxX - subViewsOrderedByLeft[index+1].frame.origin.x),
+                    distance: (subViewsSizeOrderedByLeft[index].maxX - subViewsOrderedByLeft[index+1].frame.origin.x),
                     isVerticle: false
                 )
                 

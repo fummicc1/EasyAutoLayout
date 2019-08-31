@@ -15,13 +15,14 @@
 		D37CDCE922F3D91500CF9E21 /* EasyAutoLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = D37CDCDB22F3D91500CF9E21 /* EasyAutoLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D37CDCF922F3D97F00CF9E21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37CDCF822F3D97F00CF9E21 /* AppDelegate.swift */; };
 		D37CDCFB22F3D97F00CF9E21 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37CDCFA22F3D97F00CF9E21 /* ViewController.swift */; };
-		D37CDCFE22F3D97F00CF9E21 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D37CDCFC22F3D97F00CF9E21 /* Main.storyboard */; };
+		D37CDCFE22F3D97F00CF9E21 /* Exampl1.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D37CDCFC22F3D97F00CF9E21 /* Exampl1.storyboard */; };
 		D37CDD0022F3D98000CF9E21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D37CDCFF22F3D98000CF9E21 /* Assets.xcassets */; };
 		D37CDD0322F3D98000CF9E21 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D37CDD0122F3D98000CF9E21 /* LaunchScreen.storyboard */; };
 		D37CDD0E22F3D98000CF9E21 /* DemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37CDD0D22F3D98000CF9E21 /* DemoTests.swift */; };
 		D37CDD1722F3D99D00CF9E21 /* EasyAutoLayoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37CDD1622F3D99D00CF9E21 /* EasyAutoLayoutViewController.swift */; };
 		D37CDD1822F3EDB700CF9E21 /* EasyAutoLayout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D37CDCD822F3D91500CF9E21 /* EasyAutoLayout.framework */; };
 		D37CDD1922F3EDB700CF9E21 /* EasyAutoLayout.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D37CDCD822F3D91500CF9E21 /* EasyAutoLayout.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D3BC1552231A8C200090DD8B /* Example2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3BC1551231A8C200090DD8B /* Example2.storyboard */; };
 		D3FF1F8722F59FCC00CCE995 /* DeviceAdjustMent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FF1F8622F59FCC00CCE995 /* DeviceAdjustMent.swift */; };
 		D3FF1F8922F5A98000CCE995 /* CGRect+Mathematicable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FF1F8822F5A98000CCE995 /* CGRect+Mathematicable.swift */; };
 /* End PBXBuildFile section */
@@ -77,7 +78,7 @@
 		D37CDCF622F3D97F00CF9E21 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D37CDCF822F3D97F00CF9E21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D37CDCFA22F3D97F00CF9E21 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		D37CDCFD22F3D97F00CF9E21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D37CDCFD22F3D97F00CF9E21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Exampl1.storyboard; sourceTree = "<group>"; };
 		D37CDCFF22F3D98000CF9E21 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D37CDD0222F3D98000CF9E21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D37CDD0422F3D98000CF9E21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -85,6 +86,7 @@
 		D37CDD0D22F3D98000CF9E21 /* DemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoTests.swift; sourceTree = "<group>"; };
 		D37CDD0F22F3D98000CF9E21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D37CDD1622F3D99D00CF9E21 /* EasyAutoLayoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyAutoLayoutViewController.swift; sourceTree = "<group>"; };
+		D3BC1551231A8C200090DD8B /* Example2.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Example2.storyboard; sourceTree = "<group>"; };
 		D3FF1F8622F59FCC00CCE995 /* DeviceAdjustMent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceAdjustMent.swift; sourceTree = "<group>"; };
 		D3FF1F8822F5A98000CCE995 /* CGRect+Mathematicable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGRect+Mathematicable.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -172,12 +174,13 @@
 		D37CDCF722F3D97F00CF9E21 /* Demo */ = {
 			isa = PBXGroup;
 			children = (
+				D37CDD0422F3D98000CF9E21 /* Info.plist */,
+				D3BC1551231A8C200090DD8B /* Example2.storyboard */,
 				D37CDCF822F3D97F00CF9E21 /* AppDelegate.swift */,
 				D37CDCFA22F3D97F00CF9E21 /* ViewController.swift */,
-				D37CDCFC22F3D97F00CF9E21 /* Main.storyboard */,
 				D37CDCFF22F3D98000CF9E21 /* Assets.xcassets */,
+				D37CDCFC22F3D97F00CF9E21 /* Exampl1.storyboard */,
 				D37CDD0122F3D98000CF9E21 /* LaunchScreen.storyboard */,
-				D37CDD0422F3D98000CF9E21 /* Info.plist */,
 			);
 			path = Demo;
 			sourceTree = "<group>";
@@ -344,9 +347,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3BC1552231A8C200090DD8B /* Example2.storyboard in Resources */,
 				D37CDD0322F3D98000CF9E21 /* LaunchScreen.storyboard in Resources */,
 				D37CDD0022F3D98000CF9E21 /* Assets.xcassets in Resources */,
-				D37CDCFE22F3D97F00CF9E21 /* Main.storyboard in Resources */,
+				D37CDCFE22F3D97F00CF9E21 /* Exampl1.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -419,12 +423,12 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		D37CDCFC22F3D97F00CF9E21 /* Main.storyboard */ = {
+		D37CDCFC22F3D97F00CF9E21 /* Exampl1.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				D37CDCFD22F3D97F00CF9E21 /* Base */,
 			);
-			name = Main.storyboard;
+			name = Exampl1.storyboard;
 			sourceTree = "<group>";
 		};
 		D37CDD0122F3D98000CF9E21 /* LaunchScreen.storyboard */ = {
