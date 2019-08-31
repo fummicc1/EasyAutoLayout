@@ -8,10 +8,11 @@ extension EasyAutoLayoutView {
         attributes: (from: KeyPath<EasyAutoLayoutView, T>, to: KeyPath<EasyAutoLayoutView, T>),
         distance: CGFloat,
         multiply: CGFloat,        
-        isVerticle: Bool = true
+        isVerticle: Bool = true,
+        priority: UILayoutPriority
         ) -> NSLayoutConstraint? {
         
-        if self.superview != from.superview || type(of: from.superview) == UIWindow.self {
+        if self.superview != from.superview, from != self.superview {
             return nil
         }
         
@@ -26,14 +27,17 @@ extension EasyAutoLayoutView {
         let constraint: NSLayoutConstraint
         let fromAnchor = from[keyPath: attributes.from]
         let toAnchor = self[keyPath: attributes.to]
-        if case let (fromAnchor?, toAnchor?) = (fromAnchor as? NSLayoutDimension, toAnchor as? NSLayoutDimension)  {
+        if case let (_?, toAnchor?) = (fromAnchor as? NSLayoutDimension, toAnchor as? NSLayoutDimension)  {
             constraint = toAnchor.constraint(equalToConstant: distance)
+            constraint.priority = priority
             return constraint
         } else if case let (fromAnchor?, toAnchor?) = (fromAnchor as? NSLayoutXAxisAnchor, toAnchor as? NSLayoutXAxisAnchor) {
-            constraint = fromAnchor.constraint(equalTo: toAnchor, constant: distance)
+            constraint = toAnchor.constraint(equalTo: fromAnchor, constant: distance)
+            constraint.priority = priority
             return constraint
         } else if case let (fromAnchor?, toAnchor?) = (fromAnchor as? NSLayoutYAxisAnchor, toAnchor as? NSLayoutYAxisAnchor) {
-            constraint = fromAnchor.constraint(equalTo: toAnchor, constant: distance)
+            constraint = toAnchor.constraint(equalTo: fromAnchor, constant: distance)
+            constraint.priority = priority
             return constraint
         }
         return nil
