@@ -71,7 +71,7 @@ open class EasyAutoLayoutViewController: UIViewController {
                     target: subview,
                     from: self.view,
                     attributes: (from: bottom, to: bottom),
-                    distance: (self.view.frame.maxY - subViewsSizeOrderedByTop[index].maxY * DeviceAdjustMent.heightMultiply),
+                    distance: (self.view.frame.maxY / DeviceAdjustMent.heightMultiply - subViewsSizeOrderedByTop[index].maxY),
                     isVerticle: true
                 )
                 
@@ -96,7 +96,7 @@ open class EasyAutoLayoutViewController: UIViewController {
                     target: subview,
                     from: self.view,
                     attributes: (from: top, to: top),
-                    distance: (subViewsSizeOrderedByTop[index].origin.y - self.view.frame.origin.y * DeviceAdjustMent.heightMultiply),
+                    distance: (subViewsSizeOrderedByTop[index].origin.y - self.view.frame.origin.y / DeviceAdjustMent.heightMultiply),
                     isVerticle: true
                 )
                 
@@ -160,7 +160,7 @@ open class EasyAutoLayoutViewController: UIViewController {
                     target: subview,
                     from: self.view,
                     attributes: (from: right, to: right),
-                    distance: (subview.frame.maxX - self.view.frame.maxX * DeviceAdjustMent.widthMultiply),
+                    distance: (subview.frame.maxX - self.view.frame.maxX / DeviceAdjustMent.widthMultiply),
                     isVerticle: false
                 )
                 
@@ -185,7 +185,7 @@ open class EasyAutoLayoutViewController: UIViewController {
                     target: subview,
                     from: self.view,
                     attributes: (from: left, to: left),
-                    distance: (subview.frame.origin.x - self.view.frame.origin.x * DeviceAdjustMent.widthMultiply),
+                    distance: (subview.frame.origin.x - self.view.frame.origin.x / DeviceAdjustMent.widthMultiply),
                     isVerticle: false
                 )
                 
