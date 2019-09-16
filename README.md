@@ -6,25 +6,47 @@ Storyboard上でiPhoneXまたはiPhoneXSのレイアウトを組めば、他の�
 - とても沢山の引数を持つ`NSLayoutConstraint`... これは熟練の開発者なら毛でもないですが、ビギナーにとっては決して簡単なものではないはずです。この`EasyAutoLayout`はそういったデベロッパーの手助けになることを目標に開発を始めました。
 - 将来的には、熟練のデベロッパーにも使ってもらいたいです。
 
-# 現在の状況 (current version == 1.0.0)
+# Current State (current version == 1.0.0)
 
-## Storyboard上でのレイアウト
+##　Implementing UIStoryboard. (Example)
+
+- `UIStoryboard`側ではiPhoneX/XSサイズのレイアウトで作成していれば問題はないです。
+
 ![picture2](Assets/picture2.png)
 
-## 実際のレイアウト
+## Implementing Swift Code.
 
-![picture](Assets/picture1.png)
-
-
-# How to user
-いつも通り継承している`UIViewController`の代わりに`EasyAutoLayoutViewController`を継承するのみです。
+現時点では`UIViewController`のサブクラスの`EasyAutoLayoutViewController`を継承するのみです。
+修正して、もっとカスタマイザブルにしていきたいと考えています。
 
 ```Example.swift
 import UIKit
-import EasyAutoLayout
+import EasyAutoLayout // need import
 
-class ViewController: EasyAutoLayoutViewController {
+class ViewController: EasyAutoLayoutViewController { // need inheritance
 }
+```
+
+# Layouts on any Simulators are Automated.
+
+![picture](Assets/picture1.png)
+
+# Installation
+
+### Cocoapods
+
+1. 以下のコード例に沿って、`Podfile`を編集してください。
+
+```ruby
+target 'MyApp' do
+  pod 'EasyAutoLayout', '~> 1.0'
+end
+```
+
+2. ターミナル上で`pod install` または `pod update`を実行します。
+
+```bash
+pod install
 ```
 
 
