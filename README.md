@@ -8,7 +8,7 @@ Storyboard上でiPhoneXまたはiPhoneXSのレイアウトを組めば、他の�
 
 # Current State (current version == 1.0.0)
 
-##　Implementing UIStoryboard. (Example)
+## Implementing UIStoryboard. (Example)
 
 - `UIStoryboard`側ではiPhoneX/XSサイズのレイアウトで作成していれば問題はないです。
 
