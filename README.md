@@ -34,3 +34,6 @@ class ViewController: EasyAutoLayoutViewController {
 
 # ToDo
 - [] 
+
+## License
+MIT
