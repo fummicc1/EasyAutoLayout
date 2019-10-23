@@ -2,6 +2,12 @@ import Foundation
 
 open class EasyAutoLayoutViewController: UIViewController {
     
+    /// Storyboardで使用しているデバイスの種類を設定します。デフォルトはiPhoneXです。
+    open func setDefaultDeviceType(_ deviceType: DeviceType) {
+        deviceAdjustment.defaultDeviceType = deviceType        
+    }
+    
+    
     lazy var deviceAdjustment: DeviceAdjustMent = {
         let bounds = UIScreen.main.bounds
         var deviceAdjustment: DeviceAdjustMent = DeviceAdjustMent(displayDeviceType: nil)
@@ -245,5 +251,9 @@ open class EasyAutoLayoutViewController: UIViewController {
             return        
         }
         self.layoutConstraints.append(constraint)
+    }
+    
+    open func invalidateEasyAutoLayout() {
+        
     }
 }

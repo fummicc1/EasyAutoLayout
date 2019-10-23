@@ -22,6 +22,7 @@
 		D37CDD1722F3D99D00CF9E21 /* EasyAutoLayoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37CDD1622F3D99D00CF9E21 /* EasyAutoLayoutViewController.swift */; };
 		D37CDD1822F3EDB700CF9E21 /* EasyAutoLayout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D37CDCD822F3D91500CF9E21 /* EasyAutoLayout.framework */; };
 		D37CDD1922F3EDB700CF9E21 /* EasyAutoLayout.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D37CDCD822F3D91500CF9E21 /* EasyAutoLayout.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D3A92D322360351A008918C5 /* DeviceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A92D312360351A008918C5 /* DeviceType.swift */; };
 		D3BC1552231A8C200090DD8B /* Example2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3BC1551231A8C200090DD8B /* Example2.storyboard */; };
 		D3FF1F8722F59FCC00CCE995 /* DeviceAdjustMent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FF1F8622F59FCC00CCE995 /* DeviceAdjustMent.swift */; };
 		D3FF1F8922F5A98000CCE995 /* CGRect+Mathematicable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FF1F8822F5A98000CCE995 /* CGRect+Mathematicable.swift */; };
@@ -86,6 +87,7 @@
 		D37CDD0D22F3D98000CF9E21 /* DemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoTests.swift; sourceTree = "<group>"; };
 		D37CDD0F22F3D98000CF9E21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D37CDD1622F3D99D00CF9E21 /* EasyAutoLayoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyAutoLayoutViewController.swift; sourceTree = "<group>"; };
+		D3A92D312360351A008918C5 /* DeviceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceType.swift; sourceTree = "<group>"; };
 		D3BC1551231A8C200090DD8B /* Example2.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Example2.storyboard; sourceTree = "<group>"; };
 		D3FF1F8622F59FCC00CCE995 /* DeviceAdjustMent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceAdjustMent.swift; sourceTree = "<group>"; };
 		D3FF1F8822F5A98000CCE995 /* CGRect+Mathematicable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGRect+Mathematicable.swift"; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				D307063122F3FB6C00D300F8 /* Array+isNotEmpty.swift */,
 				D3FF1F8822F5A98000CCE995 /* CGRect+Mathematicable.swift */,
 				D3FF1F8622F59FCC00CCE995 /* DeviceAdjustMent.swift */,
+				D3A92D312360351A008918C5 /* DeviceType.swift */,
 				D379DD7322F5518B00ED0AAB /* EasyAutoLayoutView.swift */,
 				D37CDD1622F3D99D00CF9E21 /* EasyAutoLayoutViewController.swift */,
 				D379DD7C22F55CAD00ED0AAB /* Typealias.swift */,
@@ -373,6 +376,7 @@
 				D3FF1F8922F5A98000CCE995 /* CGRect+Mathematicable.swift in Sources */,
 				D307063222F3FB6C00D300F8 /* Array+isNotEmpty.swift in Sources */,
 				D379DD7422F5518B00ED0AAB /* EasyAutoLayoutView.swift in Sources */,
+				D3A92D322360351A008918C5 /* DeviceType.swift in Sources */,
 				D379DD7D22F55CAD00ED0AAB /* Typealias.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -2,25 +2,14 @@ import Foundation
 
 struct DeviceAdjustMent {
     
-    let defaultDeviceType: DeviceType = .iPhoneX
+    var defaultDeviceType: DeviceType
     var displayDeviceType: DeviceType?
     static var widthMultiply: CGFloat = 1.0
     static var heightMultiply: CGFloat = 1.0
     
-    enum DeviceType {
-        case iPhoneSE
-        case iPhone6
-        case iPhone6s
-        case iPhone7
-        case iPhone8
-        case iPhone6Plus
-        case iPhone6sPlus
-        case iPhone7Plus
-        case iPhone8Plus
-        case iPhoneX
-        case iPhoneXS
-        case iPhoneXSMAX
-        case iPhoneXR
+    init(defaultDeviceType: DeviceType = .iPhoneX, displayDeviceType: DeviceType?) {
+        self.defaultDeviceType = defaultDeviceType
+        self.displayDeviceType = displayDeviceType
     }
 }
 
