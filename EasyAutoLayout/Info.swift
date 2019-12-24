@@ -2,11 +2,9 @@ import Foundation
 
 extension EasyAutoLayout {
     
-    public struct Info {
+    public class Info {
         
-        public static let shared = Info()
-        
-        private let base: Device
+        private(set) var base: Device
         lazy var displayDevice: Device = {
             
             let size = UIScreen.main.bounds.size
@@ -24,6 +22,10 @@ extension EasyAutoLayout {
                 fatalError("No device whose name is \(name) was found")
             }
             self.base = base
+        }
+        
+        public func setBaseDevice(_ device: Device) {
+            self.base = device
         }
     }
 
@@ -74,7 +76,12 @@ extension EasyAutoLayout {
             case iPhone11ProMax
         }
         
-        public init?(_ name: Name) {
+        public init?(_ name: String) {
+            guard let name = Name(rawValue: name) else { return nil }
+            self.init(name)
+        }
+        
+        init?(_ name: Name) {
             self.name = name
             
             guard let size = EasyAutoLayout.allDevices.first(where: { $0.name == name })?.size else {
